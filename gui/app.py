@@ -2,11 +2,15 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import sv_ttk
 from data.data_manager import load_animals
+from gui.animal_form import AnimalFormWindow
 
 class AnimalApp(tk.Tk):
     def __init__(self):
         super().__init__()
 
+        self.animal_type = None
+        self.toggle_reserved_button = None
+        self.selected_animal_name = None
         self.available_button = None
         self.sorting_frame = None
         self.load_button_dogs = None
@@ -62,6 +66,8 @@ class AnimalApp(tk.Tk):
 
         self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
 
+
+
     def action_buttons(self):
         self.action_frame = ttk.LabelFrame(self.main_frame, text="Action")
         self.action_frame.grid(row=1, column=0, sticky="nw", padx=10, pady=0)
@@ -72,14 +78,17 @@ class AnimalApp(tk.Tk):
         self.load_button_monkey = ttk.Button(self.action_frame, text="Load Monkey", command=self.load_monkey)
         self.load_button_monkey.grid(row=1, column=0, padx=5, pady=5)
 
-        self.add_button_dog = ttk.Button(self.action_frame, text="Add Dog")
+        self.add_button_dog = ttk.Button(self.action_frame, text="Add Dog", command=self.add_dog)
         self.add_button_dog.grid(row=2, column=0, padx=5, pady=5)
 
-        self.add_button_monkey = ttk.Button(self.action_frame, text="Add Monkey")
+        self.add_button_monkey = ttk.Button(self.action_frame, text="Add Monkey", command=self.add_monkey)
         self.add_button_monkey.grid(row=3, column=0, padx=5, pady=5)
 
         self.available_button = ttk.Button(self.action_frame, text="Available", command=self.show_reserved)
         self.available_button.grid(row=0, column=1, padx=25, pady=5)
+
+        self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved")
+        self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
 
     def load_dogs(self):
         dogs = load_animals("data/animal_data_dog.json")
@@ -88,6 +97,12 @@ class AnimalApp(tk.Tk):
     def load_monkey(self):
         monkey = load_animals("data/animal_data_monkey.json")
         self.display_animals(monkey)
+
+    def add_dog(self):
+        AnimalFormWindow(self, animal_type="Dog")
+
+    def add_monkey(self):
+        AnimalFormWindow(self, animal_type="Monkey")
 
     def display_animals(self, animals):
         """Display animals in the treeview."""
@@ -117,3 +132,8 @@ class AnimalApp(tk.Tk):
         reserved_animals = [animal for animal in all_animals if animal.get("reserved") == "No"]
 
         self.display_animals(reserved_animals)
+
+
+
+
+

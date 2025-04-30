@@ -4,22 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CS499_Enhancement1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/animals/dog.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/animals/monkey.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/animals/rescue_animal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/animal_data_dog.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/animal_data_monkey.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/data_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/animal_form.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/animal_data_dog.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/animal_data_dog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/animal_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/animal_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +25,26 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;chris3024&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/chris3024/CS_499_Enhancement_1&quot;,
+    &quot;accountId&quot;: &quot;9f41f885-3b05-4f00-a48f-466e71f6cee5&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2wQJ8vlXAZgvyTZ4GEcYunmXRTh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -54,6 +58,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/chris/PycharmProjects/CS499_Enhancement1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -138,15 +144,94 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1745967708989</updated>
-      <workItem from="1745967710017" duration="8536000" />
+      <workItem from="1745967710017" duration="9346000" />
+      <workItem from="1746044064863" duration="6268000" />
+      <workItem from="1746050407462" duration="371000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit for Enhancement 1 CS 499">
+      <option name="closed" value="true" />
+      <created>1745976408387</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745976408387</updated>
+    </task>
+    <task id="LOCAL-00002" summary="First commit for Enhancement 1 CS 499">
+      <option name="closed" value="true" />
+      <created>1745976495475</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745976495475</updated>
+    </task>
+    <task id="LOCAL-00003" summary="First commit for Enhancement 1 CS 499">
+      <option name="closed" value="true" />
+      <created>1745976512117</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745976512117</updated>
+    </task>
+    <task id="LOCAL-00004" summary="First commit for Enhancement 1 CS 499">
+      <option name="closed" value="true" />
+      <created>1745976526235</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745976526235</updated>
+    </task>
+    <task id="LOCAL-00005" summary="First commit for Enhancement 1 CS 499">
+      <option name="closed" value="true" />
+      <created>1745976727481</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745976727481</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1">
+      <option name="closed" value="true" />
+      <created>1745977108606</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1745977108606</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit for Enhancement 1 CS 499" />
+    <MESSAGE value="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1745976255793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1746050778146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CS499_Enhancement1$test.coverage" NAME="test Coverage Results" MODIFIED="1745972000333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

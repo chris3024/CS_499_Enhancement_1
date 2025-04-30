@@ -24,5 +24,18 @@
         "training_status": "Not Trained",
         "reserved": "Yes",
         "in_service_country": "USA"
+    },
+    {
+        "name": "Luna",
+        "animal_type": "Dog",
+        "gender": "Female",
+        "age": "6",
+        "weight": "80",
+        "acquisition_date": "2025-04-30",
+        "acquisition_country": "USA",
+        "training_status": "Fully Trained",
+        "reserved": "Yes",
+        "in_service_country": "USA",
+        "breed": "Doodle"
     }
 ]
