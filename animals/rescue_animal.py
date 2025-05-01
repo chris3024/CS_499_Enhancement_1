@@ -16,7 +16,7 @@ class RescueAnimal:
         self._in_service_country = in_service_country
         self._animal_type = None
 
-        # Setters and Getters for the class
+    # Setters and Getters for the class
     @property
     def name(self):
         return self._name

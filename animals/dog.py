@@ -12,6 +12,7 @@ class Dog(RescueAnimal):
         self._breed = breed
         self._animal_type = 'Dog'
 
+    # Getters/Setters for Dog class
     @property
     def breed(self):
         return self._breed

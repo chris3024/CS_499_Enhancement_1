@@ -1,8 +1,6 @@
 # data/data_manager.py
 
 import json
-from logging import exception
-
 
 def load_animals(file_name):
     # Loading dogs from JSON
@@ -16,9 +14,9 @@ def load_animals(file_name):
         return []
 
 def save_animals(file_name, animal_data):
-    """Save animal data to a JSON file."""
+    # Saving the data to the JSON
     try:
-        # Ensure animal_data is a list of dictionaries and not wrapped in another list
+
         if isinstance(animal_data, list) and all(isinstance(item, dict) for item in animal_data):
             with open(file_name, "w", encoding="utf-8") as file:
                 json.dump(animal_data, file, indent=4)

@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="Added requirements.txt">
+    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="add TODO">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animals/dog.py" beforeDir="false" afterPath="$PROJECT_DIR$/animals/dog.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animals/monkey.py" beforeDir="false" afterPath="$PROJECT_DIR$/animals/monkey.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animals/rescue_animal.py" beforeDir="false" afterPath="$PROJECT_DIR$/animals/rescue_animal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/animal_data_dog.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/animal_data_dog.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/animal_data_monkey.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/animal_data_monkey.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/animal_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/animal_form.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +52,9 @@
     &quot;accountId&quot;: &quot;9f41f885-3b05-4f00-a48f-466e71f6cee5&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -55,23 +67,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/chris/PycharmProjects/IT145_CS499",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/PycharmProjects/IT145_CS499&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;de.andrena.codingaider.settings.AiderSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\chris\PycharmProjects\CS499_Enhancement1\data" />
@@ -151,7 +165,10 @@
       <workItem from="1745967710017" duration="9346000" />
       <workItem from="1746044064863" duration="6268000" />
       <workItem from="1746050407462" duration="816000" />
-      <workItem from="1746057736668" duration="2464000" />
+      <workItem from="1746057736668" duration="4181000" />
+      <workItem from="1746116126999" duration="925000" />
+      <workItem from="1746117062693" duration="2127000" />
+      <workItem from="1746119208117" duration="639000" />
     </task>
     <task id="LOCAL-00001" summary="First commit for Enhancement 1 CS 499">
       <option name="closed" value="true" />
@@ -233,7 +250,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746057825515</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Implemented the toggle status button">
+      <option name="closed" value="true" />
+      <created>1746061802363</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746061802363</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add TODO">
+      <option name="closed" value="true" />
+      <created>1746061929078</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1746061929078</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,10 +300,12 @@
     <MESSAGE value="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1" />
     <MESSAGE value="Added the forms to add animals" />
     <MESSAGE value="Added requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added requirements.txt" />
+    <MESSAGE value="Implemented the toggle status button" />
+    <MESSAGE value="add TODO" />
+    <option name="LAST_COMMIT_MESSAGE" value="add TODO" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1746059944543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1746119849099" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CS499_Enhancement1$test.coverage" NAME="test Coverage Results" MODIFIED="1745972000333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

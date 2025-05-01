@@ -6,6 +6,8 @@ from tkinter import messagebox
 from datetime import datetime
 from data.data_manager import save_animals
 
+
+# Class to hold new window to add a new animal
 class AnimalFormWindow(tk.Toplevel):
     def __init__(self, parent, animal_type):
         super().__init__(parent)
@@ -32,6 +34,7 @@ class AnimalFormWindow(tk.Toplevel):
 
         self.add_form()
 
+    # Form to add the animal
     def add_form(self):
         self.animal_frame = tk.LabelFrame(self, text="Add Animal")
         self.animal_frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
@@ -42,6 +45,7 @@ class AnimalFormWindow(tk.Toplevel):
         self.name_entry = ttk.Entry(self.animal_frame, width=field_width)
         self.name_entry.grid(row=0, column=1, padx=10, pady=5, sticky="e")
 
+        # Determine whether animal is Dog or Monkey, sets the correct information input for Breed/Species
         if self.animal_type == "Dog":
             ttk.Label(self.animal_frame, text="Breed").grid(row=1, column=0, padx=10, pady=10, sticky="e")
             self.breed_entry = ttk.Entry(self.animal_frame, width=field_width)
@@ -74,7 +78,7 @@ class AnimalFormWindow(tk.Toplevel):
         self.date_entry = ttk.Entry(self.animal_frame, width=field_width)
         self.date_entry.grid(row=5, column=1, padx=10, pady=5, sticky="e")
 
-        # Inserting current date when adding dog
+        # Inserting current date when adding animal
         current_date = datetime.today().strftime('%Y-%m-%d')
         self.date_entry.insert(0, current_date)
 
@@ -134,6 +138,7 @@ class AnimalFormWindow(tk.Toplevel):
 
         }
 
+        # Determining the correct information to add and location to save dependent on the animal type
         if self.animal_type == "Monkey":
             species = self.species_combobox.get()
             animal_data["species"] = species
@@ -148,8 +153,11 @@ class AnimalFormWindow(tk.Toplevel):
             tk.messagebox.showerror("Error", "Please fill all fields.", parent=self)
             return
 
+        # Saving the animal to the JSON
         save_animals(file_name, animal_data)
 
-        messagebox.showinfo("Success", f"{self.animal_type} information saved!", parent=self)
+        # Displaying message if success
+        tk.messagebox.showinfo("Success", f"{self.animal_type} information saved!", parent=self)
 
+        # Closing the window
         self.destroy()

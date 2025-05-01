@@ -15,6 +15,7 @@ class Monkey(RescueAnimal):
         self._body_length = body_length
         self._animal_type = 'Monkey'
 
+    # Getters/Setters for Monkey class
     @property
     def species(self):
         return self._species

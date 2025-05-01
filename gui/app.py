@@ -4,11 +4,12 @@ import sv_ttk
 from data.data_manager import load_animals, save_animals
 from gui.animal_form import AnimalFormWindow
 
-# TODO: add comments to all of the different files
+# Class that houses the main application framework and logic
 class AnimalApp(tk.Tk):
     def __init__(self):
         super().__init__()
 
+        self.load_all = None
         self.animal_type = None
         self.toggle_reserved_button = None
         self.selected_animal_name = None
@@ -34,7 +35,7 @@ class AnimalApp(tk.Tk):
         self.main_frame = ttk.Frame(self)
         self.main_frame.grid(column=0, row=0, sticky="nw", padx=0, pady=10)
 
-
+        # Main Frame configuration
         self.main_frame.columnconfigure(0, weight=1, uniform="equal")
         self.main_frame.columnconfigure(1, weight=0, uniform="equal")
         self.main_frame.rowconfigure(0, weight=1, uniform="equal")
@@ -43,7 +44,7 @@ class AnimalApp(tk.Tk):
         self.create_table()
         self.action_buttons()
 
-
+    # Creates the table that holds the animal data to display
     def create_table(self):
         column_widths = {
             "Name": 100,
@@ -67,29 +68,44 @@ class AnimalApp(tk.Tk):
 
         self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
 
+    # Function to toggle reserved_status
     def toggle_status(self):
+
+        # Getting the selected animal from the treeview
         selected_animal = self.tree.selection()
 
+        # Error checking to make sure animal is selected
         if not selected_animal:
             tk.messagebox.showerror("Error", "No animal selected")
             return
 
+        # Getting the selected animals information
         item = self.tree.item(selected_animal[0])
         value = item['values']
-        print(f"Selected animal: {value}")  # Debug print to check the values from Treeview
+
+        # Debug print to check the values from Treeview
+        print(f"Selected animal: {value}")
 
         reserved_status = value[9]
+
+        # Debug print to check the values from Treeview
         print(f"Current reserved status: {reserved_status}")
 
         new_status = "Yes" if reserved_status == "No" else "No"
+
+        # Debug print to check the values from Treeview
         print(f"New reserved status: {new_status}")
 
+        # Setting the updated value and refreshing the treeview
         updated_values = value[:9] + [new_status] + value[10:]
         self.tree.item(selected_animal[0], values=updated_values)
 
+        # Getting the animal name/type from the treeview
         animal_name = value[0]
-        animal_type = value[1]  # Get the animal type from the Treeview (assuming it's in the second column)
-        print(f"Looking for animal with name: {animal_name} and type: {animal_type}")  # Debug print
+        animal_type = value[1]
+
+        # Debug print
+        print(f"Looking for animal with name: {animal_name} and type: {animal_type}")
 
         # Load the correct file based on the selected animal type
         if animal_type == "Dog":
@@ -101,27 +117,30 @@ class AnimalApp(tk.Tk):
             return
 
         animals = load_animals(file_name)
-        print(f"Loaded {len(animals)} animals from {file_name}")  # Debug to check if animals are loaded
+        # Debug to check if animals are loaded
+        print(f"Loaded {len(animals)} animals from {file_name}")
 
         # Find the selected animal by matching both name and type
         animal_found = False
         for animal in animals:
-            print(
-                f"Checking animal: {animal['name']} of type {animal['animal_type']}")  # Debug to check if we are matching the correct animal
+            # Debug to check if we are matching the correct animal
+            print(f"Checking animal: {animal['name']} of type {animal['animal_type']}")
+            # Matching the animal_name and animal_type, then applying the new updated status
             if animal["name"] == animal_name and animal["animal_type"] == animal_type:
                 animal["reserved"] = new_status
                 animal_found = True
                 break
-
+        # Error message if not found
         if not animal_found:
             tk.messagebox.showerror("Error", "Animal not found")
             return
 
         # Save the updated data back to the JSON file
         save_animals(file_name, animals)
-
+        # Display to show success
         tk.messagebox.showinfo("Success", "Animal data saved")
 
+    # All buttons to perform the actions
     def action_buttons(self):
         self.action_frame = ttk.LabelFrame(self.main_frame, text="Action")
         self.action_frame.grid(row=1, column=0, sticky="nw", padx=10, pady=0)
@@ -132,34 +151,52 @@ class AnimalApp(tk.Tk):
         self.load_button_monkey = ttk.Button(self.action_frame, text="Load Monkey", command=self.load_monkey)
         self.load_button_monkey.grid(row=1, column=0, padx=5, pady=5)
 
+        self.load_all = ttk.Button(self.action_frame, text="Load All", command=self.load_all_animals)
+        self.load_all.grid(row=2, column=0, padx=5, pady=5)
+
         self.add_button_dog = ttk.Button(self.action_frame, text="Add Dog", command=self.add_dog)
-        self.add_button_dog.grid(row=2, column=0, padx=5, pady=5)
+        self.add_button_dog.grid(row=3, column=0, padx=5, pady=5)
 
         self.add_button_monkey = ttk.Button(self.action_frame, text="Add Monkey", command=self.add_monkey)
-        self.add_button_monkey.grid(row=3, column=0, padx=5, pady=5)
+        self.add_button_monkey.grid(row=4, column=0, padx=5, pady=5)
 
         self.available_button = ttk.Button(self.action_frame, text="Available", command=self.show_reserved)
-        self.available_button.grid(row=0, column=1, padx=25, pady=5)
+        self.available_button.grid(row=0, column=2, padx=25, pady=5)
 
         self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved", command=self.toggle_status)
         self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
 
+    # Load the Dogs from the JSON
     def load_dogs(self):
         dogs = load_animals("data/animal_data_dog.json")
         self.display_animals(dogs)
 
+    # Load the Monkeys from the JSON
     def load_monkey(self):
         monkey = load_animals("data/animal_data_monkey.json")
         self.display_animals(monkey)
 
+    # Loading all the animals to display
+    def load_all_animals(self):
+        print("Loading all animals")
+        dogs = load_animals("data/animal_data_dog.json")
+        monkey = load_animals("data/animal_data_monkey.json")
+
+        all_animals = dogs + monkey
+        print(f"Loaded animals: {all_animals}")
+        self.display_animals(all_animals)
+
+    # Calling the animal_form to add the animal, while passing in animal_type to make sure correct form is displayed
     def add_dog(self):
         AnimalFormWindow(self, animal_type="Dog")
 
+    # Calling the animal_form to add the animal, while passing in animal_type to make sure correct form is displayed
     def add_monkey(self):
         AnimalFormWindow(self, animal_type="Monkey")
 
+    # Function to make sure the animals are displayed properly in the treeview
     def display_animals(self, animals):
-        """Display animals in the treeview."""
+
         for row in self.tree.get_children():
             self.tree.delete(row)
 
@@ -178,6 +215,7 @@ class AnimalApp(tk.Tk):
                 animal.get("in_service_country"),
             ))
 
+    # Function to filter the animals to show animals with a reserved status
     def show_reserved(self):
         dogs = load_animals("data/animal_data_dog.json")
         monkey = load_animals("data/animal_data_monkey.json")
