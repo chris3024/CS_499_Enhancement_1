@@ -4,6 +4,7 @@ import sv_ttk
 from data.data_manager import load_animals, save_animals
 from gui.animal_form import AnimalFormWindow
 
+# TODO: add comments to all of the different files
 class AnimalApp(tk.Tk):
     def __init__(self):
         super().__init__()
