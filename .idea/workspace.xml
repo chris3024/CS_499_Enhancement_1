@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1">
+    <list default="true" id="ad57c016-0526-4a9f-9a70-9325b2a6f0ce" name="Changes" comment="Added requirements.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/animal_data_dog.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/animal_data_dog.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/data_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/animal_form.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/animal_form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/animal_data_monkey.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/animal_data_monkey.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +22,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -59,7 +63,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/chris/PycharmProjects/CS499_Enhancement1",
+    "last_opened_file_path": "C:/Users/chris/PycharmProjects/IT145_CS499",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -146,7 +150,8 @@
       <updated>1745967708989</updated>
       <workItem from="1745967710017" duration="9346000" />
       <workItem from="1746044064863" duration="6268000" />
-      <workItem from="1746050407462" duration="371000" />
+      <workItem from="1746050407462" duration="816000" />
+      <workItem from="1746057736668" duration="2464000" />
     </task>
     <task id="LOCAL-00001" summary="First commit for Enhancement 1 CS 499">
       <option name="closed" value="true" />
@@ -196,7 +201,39 @@
       <option name="project" value="LOCAL" />
       <updated>1745977108606</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added the forms to add animals">
+      <option name="closed" value="true" />
+      <created>1746050921308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746050921308</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added the forms to add animals">
+      <option name="closed" value="true" />
+      <created>1746050960810</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1746050960810</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added the forms to add animals">
+      <option name="closed" value="true" />
+      <created>1746051186045</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746051186045</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added requirements.txt">
+      <option name="closed" value="true" />
+      <created>1746057825515</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746057825515</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,10 +265,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit for Enhancement 1 CS 499" />
     <MESSAGE value="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'main' of https://github.com/chris3024/CS_499_Enhancement_1" />
+    <MESSAGE value="Added the forms to add animals" />
+    <MESSAGE value="Added requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added requirements.txt" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1746050778146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CS499_Enhancement1$main.coverage" NAME="main Coverage Results" MODIFIED="1746059944543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CS499_Enhancement1$test.coverage" NAME="test Coverage Results" MODIFIED="1745972000333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

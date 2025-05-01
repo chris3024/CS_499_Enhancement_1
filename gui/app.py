@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import sv_ttk
-from data.data_manager import load_animals
+from data.data_manager import load_animals, save_animals
 from gui.animal_form import AnimalFormWindow
 
 class AnimalApp(tk.Tk):
@@ -66,7 +66,60 @@ class AnimalApp(tk.Tk):
 
         self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
 
+    def toggle_status(self):
+        selected_animal = self.tree.selection()
 
+        if not selected_animal:
+            tk.messagebox.showerror("Error", "No animal selected")
+            return
+
+        item = self.tree.item(selected_animal[0])
+        value = item['values']
+        print(f"Selected animal: {value}")  # Debug print to check the values from Treeview
+
+        reserved_status = value[9]
+        print(f"Current reserved status: {reserved_status}")
+
+        new_status = "Yes" if reserved_status == "No" else "No"
+        print(f"New reserved status: {new_status}")
+
+        updated_values = value[:9] + [new_status] + value[10:]
+        self.tree.item(selected_animal[0], values=updated_values)
+
+        animal_name = value[0]
+        animal_type = value[1]  # Get the animal type from the Treeview (assuming it's in the second column)
+        print(f"Looking for animal with name: {animal_name} and type: {animal_type}")  # Debug print
+
+        # Load the correct file based on the selected animal type
+        if animal_type == "Dog":
+            file_name = "data/animal_data_dog.json"
+        elif animal_type == "Monkey":
+            file_name = "data/animal_data_monkey.json"
+        else:
+            tk.messagebox.showerror("Error", "Unknown animal type")
+            return
+
+        animals = load_animals(file_name)
+        print(f"Loaded {len(animals)} animals from {file_name}")  # Debug to check if animals are loaded
+
+        # Find the selected animal by matching both name and type
+        animal_found = False
+        for animal in animals:
+            print(
+                f"Checking animal: {animal['name']} of type {animal['animal_type']}")  # Debug to check if we are matching the correct animal
+            if animal["name"] == animal_name and animal["animal_type"] == animal_type:
+                animal["reserved"] = new_status
+                animal_found = True
+                break
+
+        if not animal_found:
+            tk.messagebox.showerror("Error", "Animal not found")
+            return
+
+        # Save the updated data back to the JSON file
+        save_animals(file_name, animals)
+
+        tk.messagebox.showinfo("Success", "Animal data saved")
 
     def action_buttons(self):
         self.action_frame = ttk.LabelFrame(self.main_frame, text="Action")
@@ -87,7 +140,7 @@ class AnimalApp(tk.Tk):
         self.available_button = ttk.Button(self.action_frame, text="Available", command=self.show_reserved)
         self.available_button.grid(row=0, column=1, padx=25, pady=5)
 
-        self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved")
+        self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved", command=self.toggle_status)
         self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
 
     def load_dogs(self):

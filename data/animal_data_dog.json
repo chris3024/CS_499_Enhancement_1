@@ -22,7 +22,7 @@
         "acquisition_date": "2022-02-01",
         "acquisition_country": "USA",
         "training_status": "Not Trained",
-        "reserved": "Yes",
+        "reserved": "No",
         "in_service_country": "USA"
     },
     {
@@ -34,7 +34,7 @@
         "acquisition_date": "2025-04-30",
         "acquisition_country": "USA",
         "training_status": "Fully Trained",
-        "reserved": "Yes",
+        "reserved": "No",
         "in_service_country": "USA",
         "breed": "Doodle"
     }

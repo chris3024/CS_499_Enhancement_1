@@ -16,16 +16,14 @@ def load_animals(file_name):
         return []
 
 def save_animals(file_name, animal_data):
+    """Save animal data to a JSON file."""
     try:
-        # Loading the existing data
-        existing_animals = load_animals(file_name)
-
-        # Appending new animal data
-        existing_animals.append(animal_data)
-
-        with open(file_name, "w", encoding="utf-8") as file:
-            json.dump(existing_animals, file, indent=4)
-
-            print(f"Saved {len(existing_animals)} animals to {file_name}")
+        # Ensure animal_data is a list of dictionaries and not wrapped in another list
+        if isinstance(animal_data, list) and all(isinstance(item, dict) for item in animal_data):
+            with open(file_name, "w", encoding="utf-8") as file:
+                json.dump(animal_data, file, indent=4)
+            print(f"Data saved to {file_name} successfully!")
+        else:
+            print("Error: animal_data must be a list of dictionaries.")
     except Exception as e:
-        print(f"Failed to save {file_name}: {e}")
+        print(f"Error saving data to {file_name}: {e}")
