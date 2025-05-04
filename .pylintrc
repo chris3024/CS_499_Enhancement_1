@@ -14,6 +14,7 @@ disable=
     no-member,                 # suppress false positives from tkinter, pymongo
     too-many-instance-attributes,  # UI/data-heavy classes may use many
     line-too-long,
+    too-many-positional-arguments,
 
 [FORMAT]
 max-line-length=100

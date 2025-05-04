@@ -20,4 +20,3 @@ class Monkey(RescueAnimal):
     @species.setter
     def species(self, value):
         self._species = value
-
