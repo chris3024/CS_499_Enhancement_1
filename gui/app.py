@@ -3,7 +3,7 @@ gui.app
 
 """
 import tkinter as tk
-import tkinter.ttk as ttk
+from tkinter import ttk
 import sv_ttk
 from data.data_manager import load_animals, replace_all_animals
 from gui.animal_form import AnimalFormWindow
