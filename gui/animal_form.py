@@ -1,4 +1,7 @@
-# gui/animal_form.py
+"""
+gui.animal_form
+Handles the form to add animals
+"""
 
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -9,6 +12,11 @@ from data.data_manager import save_animals
 
 # Class to hold new window to add a new animal
 class AnimalFormWindow(tk.Toplevel):
+    """
+    Class AnimalFormWindow
+    handles the form to add animals
+    """
+
     def __init__(self, parent, animal_type):
         super().__init__(parent)
 
@@ -34,8 +42,12 @@ class AnimalFormWindow(tk.Toplevel):
 
         self.add_form()
 
-    # Form to add the animal
+
     def add_form(self):
+        """
+        Form to add the animal
+        """
+
         self.animal_frame = tk.LabelFrame(self, text="Add Animal")
         self.animal_frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
 
@@ -85,7 +97,7 @@ class AnimalFormWindow(tk.Toplevel):
         ttk.Label(self.animal_frame, text="Acquisition Country").grid(row=6, column=0, padx=10, pady=10, sticky="e")
         self.country_entry = ttk.Entry(self.animal_frame, width=field_width)
         self.country_entry.grid(row=6, column=1, padx=10, pady=5, sticky="e")
-        
+
         ttk.Label(self.animal_frame, text="Training Status").grid(row=7, column=0, padx=10, pady=10, sticky="e")
         self.training_combobox = ttk.Combobox(self.animal_frame, values=["Not Trained", "In Training", "Fully Trained"],
                                               state="readonly", width=25)
@@ -102,10 +114,14 @@ class AnimalFormWindow(tk.Toplevel):
 
         self.submit_button = ttk.Button(self.animal_frame, text="Submit", command=self.submit_form)
         self.submit_button.grid(row=10, column=0, padx=10, pady=5, sticky="e")
-        
-        
-    # input validation for integers
+
+
     def validate_integer(self, value):
+        """
+        input validation for integers
+        :param value:
+        """
+
         if value == "" or value.isdigit():
             return True
         else:
@@ -113,7 +129,10 @@ class AnimalFormWindow(tk.Toplevel):
             return False
 
     def submit_form(self):
-        # Collecting the data from the form
+        """
+        Collecting the data from the form
+        """
+
         name = self.name_entry.get()
         age = self.age_entry.get()
         weight = self.weight_entry.get()

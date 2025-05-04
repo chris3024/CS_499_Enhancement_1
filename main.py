@@ -1,4 +1,6 @@
-# main.py
+"""
+main.py
+"""
 
 from gui.app import AnimalApp
 

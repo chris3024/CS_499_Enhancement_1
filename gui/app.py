@@ -1,11 +1,19 @@
+"""
+gui.app
+
+"""
 import tkinter as tk
 import tkinter.ttk as ttk
 import sv_ttk
 from data.data_manager import load_animals, save_animals
 from gui.animal_form import AnimalFormWindow
 
-# Class that houses the main application framework and logic
+
 class AnimalApp(tk.Tk):
+    """
+    Class that houses the main application framework and logic
+    """
+
     def __init__(self):
         super().__init__()
 
@@ -44,8 +52,11 @@ class AnimalApp(tk.Tk):
         self.create_table()
         self.action_buttons()
 
-    # Creates the table that holds the animal data to display
+
     def create_table(self):
+        """
+        Creates the table that holds the animal data to display
+        """
         column_widths = {
             "Name": 100,
             "Type": 80,
@@ -68,8 +79,11 @@ class AnimalApp(tk.Tk):
 
         self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
 
-    # Function to toggle reserved_status
+
     def toggle_status(self):
+        """
+        Function to toggle reserved_status
+        """
 
         # Getting the selected animal from the treeview
         selected_animal = self.tree.selection()
@@ -140,8 +154,12 @@ class AnimalApp(tk.Tk):
         # Display to show success
         tk.messagebox.showinfo("Success", "Animal data saved")
 
-    # All buttons to perform the actions
+
     def action_buttons(self):
+        """
+        All buttons to perform the actions
+        """
+
         self.action_frame = ttk.LabelFrame(self.main_frame, text="Action")
         self.action_frame.grid(row=1, column=0, sticky="nw", padx=10, pady=0)
 
@@ -166,18 +184,30 @@ class AnimalApp(tk.Tk):
         self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved", command=self.toggle_status)
         self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
 
-    # Load the Dogs from the JSON
+
     def load_dogs(self):
+        """
+        Load the Dogs from the JSON
+        """
+
         dogs = load_animals("data/animal_data_dog.json")
         self.display_animals(dogs)
 
-    # Load the Monkeys from the JSON
+
     def load_monkey(self):
+        """
+        Load the Monkey from the JSON
+        """
+
         monkey = load_animals("data/animal_data_monkey.json")
         self.display_animals(monkey)
 
-    # Loading all the animals to display
+
     def load_all_animals(self):
+        """
+        Load all animals from the JSON
+        """
+
         print("Loading all animals")
         dogs = load_animals("data/animal_data_dog.json")
         monkey = load_animals("data/animal_data_monkey.json")
@@ -186,16 +216,30 @@ class AnimalApp(tk.Tk):
         print(f"Loaded animals: {all_animals}")
         self.display_animals(all_animals)
 
-    # Calling the animal_form to add the animal, while passing in animal_type to make sure correct form is displayed
+
     def add_dog(self):
+        """
+        Calling the animal_form to add the animal,
+        while passing in animal_type to make sure correct form is displayed
+        """
+
         AnimalFormWindow(self, animal_type="Dog")
 
-    # Calling the animal_form to add the animal, while passing in animal_type to make sure correct form is displayed
+
     def add_monkey(self):
+        """
+        Calling the animal_form to add the animal,
+        while passing in animal_type to make sure correct form is displayed
+        """
+
         AnimalFormWindow(self, animal_type="Monkey")
 
-    # Function to make sure the animals are displayed properly in the treeview
+
     def display_animals(self, animals):
+        """
+        Function to make sure the animals are displayed properly in the treeview
+        :param animals:
+        """
 
         for row in self.tree.get_children():
             self.tree.delete(row)
@@ -215,8 +259,12 @@ class AnimalApp(tk.Tk):
                 animal.get("in_service_country"),
             ))
 
-    # Function to filter the animals to show animals with a reserved status
+
     def show_reserved(self):
+        """
+        Function to filter the animals to show animals with a reserved status
+        """
+
         dogs = load_animals("data/animal_data_dog.json")
         monkey = load_animals("data/animal_data_monkey.json")
 
@@ -224,8 +272,3 @@ class AnimalApp(tk.Tk):
         reserved_animals = [animal for animal in all_animals if animal.get("reserved") == "No"]
 
         self.display_animals(reserved_animals)
-
-
-
-
-

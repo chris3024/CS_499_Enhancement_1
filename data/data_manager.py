@@ -6,7 +6,7 @@ Handles the saving and loading of the JSON files
 import json
 
 def load_animals(file_name):
-    # Loading dogs from JSON
+
     try:
         with open(file_name, "r", encoding="utf-8") as file:
             animals = json.load(file)
@@ -16,8 +16,9 @@ def load_animals(file_name):
         print(f"{file_name} not found!")
         return []
 
+
 def save_animals(file_name, animal_data):
-    # Saving the data to the JSON
+
     try:
 
         if isinstance(animal_data, list) and all(isinstance(item, dict) for item in animal_data):
