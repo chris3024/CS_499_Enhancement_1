@@ -13,13 +13,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.12"]
+        python-version: ["3.10", "3.12"]   # add others when needed
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5          # v5 knows about the newest versions
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -30,10 +30,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pylint
 
-      - name: Run Pylint using project pylintrc
+      - name: Run Pylint
         run: |
-          # If your pylintrc is in the repo root and named .pylintrc or pylintrc,
-          # the next line is enough.
+          # If .pylintrc / pylintrc is at repo root it’s auto‑loaded.
+          # Adjust --fail-under to the minimum score you’ll accept.
           pylint --fail-under=8 $(git ls-files '*.py')
-          # If the config lives elsewhere, comment the line above and uncomment the next one:
-          # pylint --rcfile path/to/your/pylintrc --fail-under=8 $(git ls-files '*.py')
