@@ -1,4 +1,7 @@
-# data/data_manager.py
+"""
+data.data_manager
+Handles the saving and loading of the JSON files
+"""
 
 import json
 
