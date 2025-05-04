@@ -7,6 +7,10 @@ on:
     branches: [ main, master ]          # gate every PR
   workflow_dispatch:                     # allow manual re‑runs from the UI
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
