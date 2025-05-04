@@ -1,41 +1,41 @@
 [
     {
-        "name": "Buddy",
+        "name": "Padfoot",
         "animal_type": "Dog",
-        "breed": "Golden Retriever",
         "gender": "Male",
-        "age": "3",
-        "weight": "30",
-        "acquisition_date": "2022-01-01",
+        "age": "5",
+        "weight": "75",
+        "acquisition_date": "2025-05-04",
         "acquisition_country": "USA",
-        "training_status": "Trained",
-        "reserved": "Yes",
-        "in_service_country": "USA"
-    },
-    {
-        "name": "Bella",
-        "animal_type": "Dog",
-        "breed": "Labrador",
-        "gender": "Female",
-        "age": "2",
-        "weight": "25",
-        "acquisition_date": "2022-02-01",
-        "acquisition_country": "USA",
-        "training_status": "Not Trained",
+        "training_status": "In Training",
         "reserved": "No",
-        "in_service_country": "USA"
+        "in_service_country": "USA",
+        "breed": "Doodle"
     },
     {
         "name": "Luna",
         "animal_type": "Dog",
         "gender": "Female",
-        "age": "6",
+        "age": "8",
         "weight": "80",
-        "acquisition_date": "2025-04-30",
+        "acquisition_date": "2025-05-04",
         "acquisition_country": "USA",
         "training_status": "Fully Trained",
-        "reserved": "No",
+        "reserved": "Yes",
         "in_service_country": "USA",
         "breed": "Doodle"
+    },
+    {
+        "name": "Pepper",
+        "animal_type": "Dog",
+        "gender": "Female",
+        "age": "6",
+        "weight": "85",
+        "acquisition_date": "2025-05-04",
+        "acquisition_country": "USA",
+        "training_status": "Fully Trained",
+        "reserved": "Yes",
+        "in_service_country": "USA",
+        "breed": "Newfoundland"
     }
 ]

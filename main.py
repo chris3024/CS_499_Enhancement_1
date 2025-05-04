@@ -3,7 +3,9 @@ main.py
 Runs the main application
 """
 from __future__ import annotations
-import logging, sys
+import logging
+import sys
+from gui.app import AnimalApp
 
 # Configuring logger to display
 logging.basicConfig(
@@ -12,8 +14,6 @@ logging.basicConfig(
     stream=sys.stdout,
 )
 logging.info("Starting")
-
-from gui.app import AnimalApp
 
 if __name__ == '__main__':
     app = AnimalApp()

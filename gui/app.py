@@ -5,7 +5,7 @@ gui.app
 import tkinter as tk
 import tkinter.ttk as ttk
 import sv_ttk
-from data.data_manager import load_animals, save_animals
+from data.data_manager import load_animals, replace_all_animals
 from gui.animal_form import AnimalFormWindow
 
 
@@ -52,7 +52,6 @@ class AnimalApp(tk.Tk):
         self.create_table()
         self.action_buttons()
 
-
     def create_table(self):
         """
         Creates the table that holds the animal data to display
@@ -79,7 +78,6 @@ class AnimalApp(tk.Tk):
 
         self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
 
-
     def toggle_status(self):
         """
         Function to toggle reserved_status
@@ -98,17 +96,17 @@ class AnimalApp(tk.Tk):
         value = item['values']
 
         # Debug print to check the values from Treeview
-        print(f"Selected animal: {value}")
+        # print(f"Selected animal: {value}")
 
         reserved_status = value[9]
 
         # Debug print to check the values from Treeview
-        print(f"Current reserved status: {reserved_status}")
+        # print(f"Current reserved status: {reserved_status}")
 
         new_status = "Yes" if reserved_status == "No" else "No"
 
         # Debug print to check the values from Treeview
-        print(f"New reserved status: {new_status}")
+        # print(f"New reserved status: {new_status}")
 
         # Setting the updated value and refreshing the treeview
         updated_values = value[:9] + [new_status] + value[10:]
@@ -119,7 +117,7 @@ class AnimalApp(tk.Tk):
         animal_type = value[1]
 
         # Debug print
-        print(f"Looking for animal with name: {animal_name} and type: {animal_type}")
+        # print(f"Looking for animal with name: {animal_name} and type: {animal_type}")
 
         # Load the correct file based on the selected animal type
         if animal_type == "Dog":
@@ -132,13 +130,14 @@ class AnimalApp(tk.Tk):
 
         animals = load_animals(file_name)
         # Debug to check if animals are loaded
-        print(f"Loaded {len(animals)} animals from {file_name}")
+        # print(f"Loaded {len(animals)} animals from {file_name}")
 
         # Find the selected animal by matching both name and type
         animal_found = False
         for animal in animals:
             # Debug to check if we are matching the correct animal
-            print(f"Checking animal: {animal['name']} of type {animal['animal_type']}")
+            # print(f"Checking animal: {animal['name']} of type {animal['animal_type']}")
+
             # Matching the animal_name and animal_type, then applying the new updated status
             if animal["name"] == animal_name and animal["animal_type"] == animal_type:
                 animal["reserved"] = new_status
@@ -150,10 +149,9 @@ class AnimalApp(tk.Tk):
             return
 
         # Save the updated data back to the JSON file
-        save_animals(file_name, animals)
+        replace_all_animals(file_name, animals)
         # Display to show success
         tk.messagebox.showinfo("Success", "Animal data saved")
-
 
     def action_buttons(self):
         """
@@ -184,7 +182,6 @@ class AnimalApp(tk.Tk):
         self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved", command=self.toggle_status)
         self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
 
-
     def load_dogs(self):
         """
         Load the Dogs from the JSON
@@ -193,7 +190,6 @@ class AnimalApp(tk.Tk):
         dogs = load_animals("data/animal_data_dog.json")
         self.display_animals(dogs)
 
-
     def load_monkey(self):
         """
         Load the Monkey from the JSON
@@ -201,7 +197,6 @@ class AnimalApp(tk.Tk):
 
         monkey = load_animals("data/animal_data_monkey.json")
         self.display_animals(monkey)
-
 
     def load_all_animals(self):
         """
@@ -216,7 +211,6 @@ class AnimalApp(tk.Tk):
         # print(f"Loaded animals: {all_animals}")
         self.display_animals(all_animals)
 
-
     def add_dog(self):
         """
         Calling the animal_form to add the animal,
@@ -225,7 +219,6 @@ class AnimalApp(tk.Tk):
 
         AnimalFormWindow(self, animal_type="Dog")
 
-
     def add_monkey(self):
         """
         Calling the animal_form to add the animal,
@@ -233,7 +226,6 @@ class AnimalApp(tk.Tk):
         """
 
         AnimalFormWindow(self, animal_type="Monkey")
-
 
     def display_animals(self, animals):
         """
@@ -258,7 +250,6 @@ class AnimalApp(tk.Tk):
                 animal.get("reserved"),
                 animal.get("in_service_country"),
             ))
-
 
     def show_reserved(self):
         """

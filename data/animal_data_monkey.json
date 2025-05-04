@@ -9,7 +9,7 @@
         "acquisition_date": "2020-05-12",
         "acquisition_country": "Brazil",
         "training_status": "Trained",
-        "reserved": "No",
+        "reserved": "Yes",
         "in_service_country": "USA"
     },
     {
@@ -61,7 +61,7 @@
         "acquisition_date": "2020-08-10",
         "acquisition_country": "Costa Rica",
         "training_status": "Trained",
-        "reserved": "No",
+        "reserved": "Yes",
         "in_service_country": "USA"
     },
     {
@@ -74,7 +74,7 @@
         "acquisition_date": "2023-01-05",
         "acquisition_country": "Brazil",
         "training_status": "Not Trained",
-        "reserved": "No",
+        "reserved": "Yes",
         "in_service_country": "Mexico"
     }
 ]

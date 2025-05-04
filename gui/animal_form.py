@@ -2,11 +2,10 @@
 gui.animal_form
 Handles the form to add animals
 """
-
-import tkinter as tk
-import tkinter.ttk as ttk
-from tkinter import messagebox
 from datetime import datetime
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
 from data.data_manager import save_animals
 
 
@@ -42,13 +41,12 @@ class AnimalFormWindow(tk.Toplevel):
 
         self.add_form()
 
-
     def add_form(self):
         """
         Form to add the animal
         """
 
-        self.animal_frame = tk.LabelFrame(self, text="Add Animal")
+        self.animal_frame = ttk.LabelFrame(self, text="Add Animal")
         self.animal_frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
 
         field_width = 30
@@ -66,7 +64,7 @@ class AnimalFormWindow(tk.Toplevel):
             ttk.Label(self.animal_frame, text="Species").grid(row=1, column=0, padx=10, pady=10, sticky="e")
             self.species_combobox = ttk.Combobox(self.animal_frame, values=["Capuchin", "Guenon", "Macaque",
                                                                             "Marmoset", "Squirrel Monkey", "Tamarin"],
-                                                 state="readonly",width=25)
+                                                 state="readonly", width=25)
             self.species_combobox.grid(row=1, column=1, padx=10, pady=5, sticky="e")
 
         ttk.Label(self.animal_frame, text="Gender").grid(row=2, column=0, padx=10, pady=10, sticky="e")
@@ -77,7 +75,7 @@ class AnimalFormWindow(tk.Toplevel):
         ttk.Label(self.animal_frame, text="Age").grid(row=3, column=0, padx=10, pady=10, sticky="e")
         validate_age = self.register(self.validate_integer)
         self.age_entry = ttk.Entry(self.animal_frame, width=field_width, validate="key",
-                                   validatecommand=(validate_age,"%P"))
+                                   validatecommand=(validate_age, "%P"))
         self.age_entry.grid(row=3, column=1, padx=10, pady=5, sticky="e")
 
         ttk.Label(self.animal_frame, text="Weight").grid(row=4, column=0, padx=10, pady=10, sticky="e")
@@ -115,7 +113,6 @@ class AnimalFormWindow(tk.Toplevel):
         self.submit_button = ttk.Button(self.animal_frame, text="Submit", command=self.submit_form)
         self.submit_button.grid(row=10, column=0, padx=10, pady=5, sticky="e")
 
-
     def validate_integer(self, value):
         """
         input validation for integers
@@ -124,9 +121,9 @@ class AnimalFormWindow(tk.Toplevel):
 
         if value == "" or value.isdigit():
             return True
-        else:
-            tk.messagebox.showerror("Error", "Please enter a valid integer.", parent=self)
-            return False
+
+        tk.messagebox.showerror("Error", "Please enter a valid integer.", parent=self)
+        return False
 
     def submit_form(self):
         """
@@ -168,12 +165,12 @@ class AnimalFormWindow(tk.Toplevel):
             file_name = "data/animal_data_dog.json"
 
         # Checking that fields have data entered
-        if not name or not age or not weight or not gender or not date or not country or not service:
-            tk.messagebox.showerror("Error", "Please fill all fields.", parent=self)
+        if any(not f.strip() for f in (name, age, weight, gender, country, service)):
+            tk.messagebox.showerror("Error", "Please enter all required fields.", parent=self)
             return
 
         # Saving the animal to the JSON
-        save_animals(file_name, animal_data)
+        save_animals(file_name, [animal_data])
 
         # Displaying message if success
         tk.messagebox.showinfo("Success", f"{self.animal_type} information saved!", parent=self)
