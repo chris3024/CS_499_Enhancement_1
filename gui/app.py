@@ -208,12 +208,12 @@ class AnimalApp(tk.Tk):
         Load all animals from the JSON
         """
 
-        print("Loading all animals")
+        # print("Loading all animals")
         dogs = load_animals("data/animal_data_dog.json")
         monkey = load_animals("data/animal_data_monkey.json")
 
         all_animals = dogs + monkey
-        print(f"Loaded animals: {all_animals}")
+        # print(f"Loaded animals: {all_animals}")
         self.display_animals(all_animals)
 
 
