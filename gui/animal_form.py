@@ -4,176 +4,90 @@ Handles the form to add animals
 """
 from datetime import datetime
 import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
+from tkinter import ttk, messagebox
 from data.data_manager import save_animals
 
 
 # Class to hold new window to add a new animal
 class AnimalFormWindow(tk.Toplevel):
-    """
-    Class AnimalFormWindow
-    handles the form to add animals
-    """
 
     def __init__(self, parent, animal_type):
         super().__init__(parent)
-
         self.animal_type = animal_type
-
-        self.submit_button = None
-        self.service_country_entry = None
-        self.species_combobox = None
-        self.reserved_combobox = None
-        self.training_combobox = None
-        self.country_entry = None
-        self.date_entry = None
-        self.weight_entry = None
-        self.breed_entry = None
-        self.age_entry = None
-        self.gender_combobox = None
-        self.name_entry = None
-        self.animal_frame = None
-
         self.title("Animal Form")
         self.geometry("400x600")
         self.resizable(False, False)
 
-        self.add_form()
+        self.inputs = {}
+        self._build_form()
 
-    def add_form(self):
-        """
-        Form to add the animal
-        """
-
-        self.animal_frame = ttk.LabelFrame(self, text="Add Animal")
-        self.animal_frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
-
+    def _build_form(self):
         field_width = 30
+        frame = ttk.LabelFrame(self, text="Add Animal")
+        frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
 
-        ttk.Label(self.animal_frame, text="Name").grid(row=0, column=0, padx=10, pady=10, sticky="e")
-        self.name_entry = ttk.Entry(self.animal_frame, width=field_width)
-        self.name_entry.grid(row=0, column=1, padx=10, pady=5, sticky="e")
+        def add_input(label, row, widget_function):
+            ttk.Label(frame, text=label).grid(column=0, row=row, padx=10, pady=5, sticky="e")
+            widget = widget_function()
+            widget.grid(column=1, row=row, padx=10, pady=5, sticky="w")
+            self.inputs[label.lower().replace(" ", "_")] = widget
 
-        # Determine whether animal is Dog or Monkey, sets the correct information input for Breed/Species
+        # Now you call the function outside the definition
+        add_input("Name", 0, lambda: ttk.Entry(frame, width=field_width))
+
         if self.animal_type == "Dog":
-            ttk.Label(self.animal_frame, text="Breed").grid(row=1, column=0, padx=10, pady=10, sticky="e")
-            self.breed_entry = ttk.Entry(self.animal_frame, width=field_width)
-            self.breed_entry.grid(row=1, column=1, padx=10, pady=5, sticky="e")
-        elif self.animal_type == "Monkey":
-            ttk.Label(self.animal_frame, text="Species").grid(row=1, column=0, padx=10, pady=10, sticky="e")
-            self.species_combobox = ttk.Combobox(self.animal_frame, values=["Capuchin", "Guenon", "Macaque",
-                                                                            "Marmoset", "Squirrel Monkey", "Tamarin"],
-                                                 state="readonly", width=25)
-            self.species_combobox.grid(row=1, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Gender").grid(row=2, column=0, padx=10, pady=10, sticky="e")
-        self.gender_combobox = ttk.Combobox(self.animal_frame, values=["Male", "Female"], state="readonly",
-                                            width=25)
-        self.gender_combobox.grid(row=2, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Age").grid(row=3, column=0, padx=10, pady=10, sticky="e")
-        validate_age = self.register(self.validate_integer)
-        self.age_entry = ttk.Entry(self.animal_frame, width=field_width, validate="key",
-                                   validatecommand=(validate_age, "%P"))
-        self.age_entry.grid(row=3, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Weight").grid(row=4, column=0, padx=10, pady=10, sticky="e")
-        validate_weight = self.register(self.validate_integer)
-        self.weight_entry = ttk.Entry(self.animal_frame, width=field_width, validate="key",
-                                      validatecommand=(validate_weight, "%P"))
-        self.weight_entry.grid(row=4, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Acquisition Date").grid(row=5, column=0, padx=10, pady=10, sticky="e")
-        self.date_entry = ttk.Entry(self.animal_frame, width=field_width)
-        self.date_entry.grid(row=5, column=1, padx=10, pady=5, sticky="e")
-
-        # Inserting current date when adding animal
-        current_date = datetime.today().strftime('%Y-%m-%d')
-        self.date_entry.insert(0, current_date)
-
-        ttk.Label(self.animal_frame, text="Acquisition Country").grid(row=6, column=0, padx=10, pady=10, sticky="e")
-        self.country_entry = ttk.Entry(self.animal_frame, width=field_width)
-        self.country_entry.grid(row=6, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Training Status").grid(row=7, column=0, padx=10, pady=10, sticky="e")
-        self.training_combobox = ttk.Combobox(self.animal_frame, values=["Not Trained", "In Training", "Fully Trained"],
-                                              state="readonly", width=25)
-        self.training_combobox.grid(row=7, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="Reserved").grid(row=8, column=0, padx=10, pady=10, sticky="e")
-        self.reserved_combobox = ttk.Combobox(self.animal_frame, values=["Yes", "No"], state="readonly",
-                                              width=25)
-        self.reserved_combobox.grid(row=8, column=1, padx=10, pady=5, sticky="e")
-
-        ttk.Label(self.animal_frame, text="In Service Country").grid(row=9, column=0, padx=10, pady=10, sticky="e")
-        self.service_country_entry = ttk.Entry(self.animal_frame, width=field_width)
-        self.service_country_entry.grid(row=9, column=1, padx=10, pady=5, sticky="e")
-
-        self.submit_button = ttk.Button(self.animal_frame, text="Submit", command=self.submit_form)
-        self.submit_button.grid(row=10, column=0, padx=10, pady=5, sticky="e")
-
-    def validate_integer(self, value):
-        """
-        input validation for integers
-        :param value:
-        """
-
-        if value == "" or value.isdigit():
-            return True
-
-        tk.messagebox.showerror("Error", "Please enter a valid integer.", parent=self)
-        return False
-
-    def submit_form(self):
-        """
-        Collecting the data from the form
-        """
-
-        name = self.name_entry.get()
-        age = self.age_entry.get()
-        weight = self.weight_entry.get()
-        gender = self.gender_combobox.get()
-        date = self.date_entry.get()
-        country = self.country_entry.get()
-        reserved = self.reserved_combobox.get()
-        training_status = self.training_combobox.get()
-        service = self.service_country_entry.get()
-
-        animal_data = {
-            "name": name,
-            "animal_type": self.animal_type,
-            "gender": gender,
-            "age": age,
-            "weight": weight,
-            "acquisition_date": date,
-            "acquisition_country": country,
-            "training_status": training_status,
-            "reserved": reserved,
-            "in_service_country": service
-
-        }
-
-        # Determining the correct information to add and location to save dependent on the animal type
-        if self.animal_type == "Monkey":
-            species = self.species_combobox.get()
-            animal_data["species"] = species
-            file_name = "data/animal_data_monkey.json"
+            add_input("Breed", 1, lambda: ttk.Entry(frame, width=field_width))
         else:
-            breed = self.breed_entry.get()
-            animal_data["breed"] = breed
-            file_name = "data/animal_data_dog.json"
+            add_input("Species", 1, lambda: ttk.Combobox(
+                frame, values=["Capuchin", "Guenon", "Macaque", "Marmoset", "Squirrel Monkey", "Tamarin"],
+                state="readonly", width=25))
 
-        # Checking that fields have data entered
-        if any(not f.strip() for f in (name, age, weight, gender, country, service)):
-            tk.messagebox.showerror("Error", "Please enter all required fields.", parent=self)
+        add_input("Gender", 2, lambda: ttk.Combobox(
+            frame, values=["Male", "Female"], state="readonly", width=25))
+
+        for label, row in [("Age", 3), ("Weight", 4)]:
+            add_input(label, row, lambda: ttk.Entry(
+                frame, width=field_width,
+                validate="key",
+                validatecommand=(self.register(self._validate_integer), "%P")
+            ))
+
+        add_input("Acquisition Date", 5, lambda: ttk.Entry(frame, width=field_width))
+        self.inputs["acquisition_date"].insert(0, datetime.today().strftime('%Y-%m-%d'))
+
+        add_input("Acquisition Country", 6, lambda: ttk.Entry(frame, width=field_width))
+        add_input("Training Status", 7, lambda: ttk.Combobox(
+            frame, values=["Not Trained", "In Training", "Fully Trained"], state="readonly", width=25))
+        add_input("Reserved", 8, lambda: ttk.Combobox(
+            frame, values=["Yes", "No"], state="readonly", width=25))
+        add_input("In Service Country", 9, lambda: ttk.Entry(frame, width=field_width))
+
+        submit_btn = ttk.Button(frame, text="Submit", command=self._submit_form)
+        submit_btn.grid(row=10, column=1, padx=10, pady=10, sticky="e")
+
+    @staticmethod
+    def _validate_integer(value):
+        return value.isdigit() or value == ""
+
+    def _submit_form(self):
+        required = ["name", "age", "weight", "gender", "acquisition_country", "in_service_country"]
+        data = {k: widget.get() for k, widget in self.inputs.items()}
+
+        if any(not data[k].strip() for k in required):
+            messagebox.showerror("Error", "Please fill all required fields.", parent=self)
             return
 
-        # Saving the animal to the JSON
-        save_animals(file_name, [animal_data])
+        data["animal_type"] = self.animal_type
+        file_map = {
+            "Dog": ("breed", "data/animal_data_dog.json"),
+            "Monkey": ("species", "data/animal_data_monkey.json")
+        }
 
-        # Displaying message if success
-        tk.messagebox.showinfo("Success", f"{self.animal_type} information saved!", parent=self)
+        specific_field, file_name = file_map[self.animal_type]
+        if not data.get(specific_field):
+            messagebox.showerror("Error", f"{specific_field.capitalize()} is required.", parent=self)
+            return
 
-        # Closing the window
+        save_animals(file_name, [data])
+        messagebox.showinfo("Success", f"{self.animal_type} saved!", parent=self)
         self.destroy()

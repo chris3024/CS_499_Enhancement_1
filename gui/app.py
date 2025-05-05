@@ -1,246 +1,99 @@
 """
 gui.app
-
+This houses the main GUI for the application and builds it
 """
+
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import sv_ttk
 from data.data_manager import load_animals, replace_all_animals
 from gui.animal_form import AnimalFormWindow
 
-
 class AnimalApp(tk.Tk):
-    """
-    Class that houses the main application framework and logic
-    """
-
     def __init__(self):
         super().__init__()
 
-        self.load_all = None
-        self.animal_type = None
-        self.toggle_reserved_button = None
-        self.selected_animal_name = None
-        self.available_button = None
-        self.sorting_frame = None
-        self.load_button_dogs = None
-        self.load_button_monkey = None
-        self.add_button_dog = None
-        self.add_button_monkey = None
-        self.action_frame = None
-        self.tree = None
-
-        # Table column headers
-        self.columns = ["Name", "Type", "Breed/Species", "Gender", "Age", "Weight", "Acquisition Date",
-                        "Acquisition Country", "Training Status", "Reserved", "In Service Country"]
+        self.columns = [
+            "Name", "Type", "Breed/Species", "Gender", "Age", "Weight", "Acquisition Date",
+            "Acquisition Country", "Training Status", "Reserved", "In Service Country"
+        ]
 
         self.title("Grazioso Salvare Animal Rescue Operations")
         self.geometry("1090x600")
-        self.resizable(width=False, height=False)
+        self.resizable(False, False)
         sv_ttk.set_theme('light')
 
-        # Main Frame
         self.main_frame = ttk.Frame(self)
         self.main_frame.grid(column=0, row=0, sticky="nw", padx=0, pady=10)
 
-        # Main Frame configuration
-        self.main_frame.columnconfigure(0, weight=1, uniform="equal")
-        self.main_frame.columnconfigure(1, weight=0, uniform="equal")
-        self.main_frame.rowconfigure(0, weight=1, uniform="equal")
-        self.main_frame.rowconfigure(1, weight=0)
+        self.main_frame.columnconfigure(0, weight=1)
+        self.main_frame.rowconfigure(0, weight=1)
 
-        self.create_table()
-        self.action_buttons()
+        self._create_table()
+        self._create_buttons()
 
-    def create_table(self):
-        """
-        Creates the table that holds the animal data to display
-        """
+    def _create_table(self):
         column_widths = {
-            "Name": 100,
-            "Type": 80,
-            "Breed/Species": 150,
-            "Gender": 80,
-            "Age": 50,
-            "Weight": 60,
-            "Acquisition Date": 110,
-            "Acquisition Country": 120,
-            "Training Status": 120,
-            "Reserved": 70,
-            "In Service Country": 120
+            "Name": 100, "Type": 80, "Breed/Species": 150, "Gender": 80,
+            "Age": 50, "Weight": 60, "Acquisition Date": 110, "Acquisition Country": 120,
+            "Training Status": 120, "Reserved": 70, "In Service Country": 120
         }
 
         self.tree = ttk.Treeview(self.main_frame, columns=self.columns, show="headings")
+        for col in self.columns:
+            self.tree.heading(col, text=col)
+            self.tree.column(col, width=column_widths.get(col, 100), anchor="center", stretch=False)
+        self.tree.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-        for column in self.columns:
-            self.tree.heading(column, text=column)
-            self.tree.column(column, width=column_widths.get(column, 100), anchor="center", stretch=False)
+    def _create_buttons(self):
+        frame = ttk.LabelFrame(self.main_frame, text="Actions")
+        frame.grid(row=1, column=0, sticky="nw", padx=10)
 
-        self.tree.grid(column=0, row=0, sticky="nsew", padx=10, pady=10)
+        load_buttons = [
+            ("Load Dogs", lambda: self._load_animals("dog")),
+            ("Load Monkey", lambda: self._load_animals("monkey")),
+            ("Load All", self._load_all_animals)
+        ]
 
-    def toggle_status(self):
-        """
-        Function to toggle reserved_status
-        """
+        for i, (text, cmd) in enumerate(load_buttons):
+            ttk.Button(frame, text=text, command=cmd).grid(row=0, column=i, padx=5, pady=5)
 
-        # Getting the selected animal from the treeview
-        selected_animal = self.tree.selection()
+        add_buttons = [
+            ("Add Dog", lambda: self._open_form("Dog")),
+            ("Add Monkey", lambda: self._open_form("Monkey"))
+        ]
 
-        # Error checking to make sure animal is selected
-        if not selected_animal:
-            tk.messagebox.showerror("Error", "No animal selected")
-            return
+        for i, (text, cmd) in enumerate(add_buttons):
+            ttk.Button(frame, text=text, command=cmd).grid(row=1, column=i, padx=5, pady=5)
 
-        # Getting the selected animals information
-        item = self.tree.item(selected_animal[0])
-        value = item['values']
+        action_buttons = [
+            ("Available", self._show_unreserved),
+            ("Toggle Reserved", self._toggle_reserved)
+        ]
 
-        # Debug print to check the values from Treeview
-        # print(f"Selected animal: {value}")
+        for i, (text, cmd) in enumerate(action_buttons):
+            ttk.Button(frame, text=text, command=cmd).grid(row=2, column=i, padx=5, pady=5)
 
-        reserved_status = value[9]
+    def _load_animals(self, animal_type):
+        file_map = {
+            "dog": "data/animal_data_dog.json",
+            "monkey": "data/animal_data_monkey.json"
+        }
+        animals = load_animals(file_map[animal_type])
+        self._display_animals(animals)
 
-        # Debug print to check the values from Treeview
-        # print(f"Current reserved status: {reserved_status}")
-
-        new_status = "Yes" if reserved_status == "No" else "No"
-
-        # Debug print to check the values from Treeview
-        # print(f"New reserved status: {new_status}")
-
-        # Setting the updated value and refreshing the treeview
-        updated_values = value[:9] + [new_status] + value[10:]
-        self.tree.item(selected_animal[0], values=updated_values)
-
-        # Getting the animal name/type from the treeview
-        animal_name = value[0]
-        animal_type = value[1]
-
-        # Debug print
-        # print(f"Looking for animal with name: {animal_name} and type: {animal_type}")
-
-        # Load the correct file based on the selected animal type
-        if animal_type == "Dog":
-            file_name = "data/animal_data_dog.json"
-        elif animal_type == "Monkey":
-            file_name = "data/animal_data_monkey.json"
-        else:
-            tk.messagebox.showerror("Error", "Unknown animal type")
-            return
-
-        animals = load_animals(file_name)
-        # Debug to check if animals are loaded
-        # print(f"Loaded {len(animals)} animals from {file_name}")
-
-        # Find the selected animal by matching both name and type
-        animal_found = False
-        for animal in animals:
-            # Debug to check if we are matching the correct animal
-            # print(f"Checking animal: {animal['name']} of type {animal['animal_type']}")
-
-            # Matching the animal_name and animal_type, then applying the new updated status
-            if animal["name"] == animal_name and animal["animal_type"] == animal_type:
-                animal["reserved"] = new_status
-                animal_found = True
-                break
-        # Error message if not found
-        if not animal_found:
-            tk.messagebox.showerror("Error", "Animal not found")
-            return
-
-        # Save the updated data back to the JSON file
-        replace_all_animals(file_name, animals)
-        # Display to show success
-        tk.messagebox.showinfo("Success", "Animal data saved")
-
-    def action_buttons(self):
-        """
-        All buttons to perform the actions
-        """
-
-        self.action_frame = ttk.LabelFrame(self.main_frame, text="Action")
-        self.action_frame.grid(row=1, column=0, sticky="nw", padx=10, pady=0)
-
-        self.load_button_dogs = ttk.Button(self.action_frame, text="Load Dogs", command=self.load_dogs)
-        self.load_button_dogs.grid(row=0, column=0, padx=5, pady=5)
-
-        self.load_button_monkey = ttk.Button(self.action_frame, text="Load Monkey", command=self.load_monkey)
-        self.load_button_monkey.grid(row=1, column=0, padx=5, pady=5)
-
-        self.load_all = ttk.Button(self.action_frame, text="Load All", command=self.load_all_animals)
-        self.load_all.grid(row=2, column=0, padx=5, pady=5)
-
-        self.add_button_dog = ttk.Button(self.action_frame, text="Add Dog", command=self.add_dog)
-        self.add_button_dog.grid(row=3, column=0, padx=5, pady=5)
-
-        self.add_button_monkey = ttk.Button(self.action_frame, text="Add Monkey", command=self.add_monkey)
-        self.add_button_monkey.grid(row=4, column=0, padx=5, pady=5)
-
-        self.available_button = ttk.Button(self.action_frame, text="Available", command=self.show_reserved)
-        self.available_button.grid(row=0, column=2, padx=25, pady=5)
-
-        self.toggle_reserved_button = ttk.Button(self.action_frame, text="Toggle Reserved", command=self.toggle_status)
-        self.toggle_reserved_button.grid(row=0, column=3, padx=25, pady=5)
-
-    def load_dogs(self):
-        """
-        Load the Dogs from the JSON
-        """
-
+    def _load_all_animals(self):
         dogs = load_animals("data/animal_data_dog.json")
-        self.display_animals(dogs)
+        monkeys = load_animals("data/animal_data_monkey.json")
+        self._display_animals(dogs + monkeys)
 
-    def load_monkey(self):
-        """
-        Load the Monkey from the JSON
-        """
-
-        monkey = load_animals("data/animal_data_monkey.json")
-        self.display_animals(monkey)
-
-    def load_all_animals(self):
-        """
-        Load all animals from the JSON
-        """
-
-        # print("Loading all animals")
-        dogs = load_animals("data/animal_data_dog.json")
-        monkey = load_animals("data/animal_data_monkey.json")
-
-        all_animals = dogs + monkey
-        # print(f"Loaded animals: {all_animals}")
-        self.display_animals(all_animals)
-
-    def add_dog(self):
-        """
-        Calling the animal_form to add the animal,
-        while passing in animal_type to make sure correct form is displayed
-        """
-
-        AnimalFormWindow(self, animal_type="Dog")
-
-    def add_monkey(self):
-        """
-        Calling the animal_form to add the animal,
-        while passing in animal_type to make sure correct form is displayed
-        """
-
-        AnimalFormWindow(self, animal_type="Monkey")
-
-    def display_animals(self, animals):
-        """
-        Function to make sure the animals are displayed properly in the treeview
-        :param animals:
-        """
-
-        for row in self.tree.get_children():
-            self.tree.delete(row)
-
+    def _display_animals(self, animals):
+        self.tree.delete(*self.tree.get_children())
         for animal in animals:
             self.tree.insert("", "end", values=(
                 animal.get("name"),
                 animal.get("animal_type"),
-                animal.get("breed") if "breed" in animal else animal.get("species"),
+                animal.get("breed", animal.get("species", "")),
                 animal.get("gender"),
                 animal.get("age"),
                 animal.get("weight"),
@@ -248,18 +101,42 @@ class AnimalApp(tk.Tk):
                 animal.get("acquisition_country"),
                 animal.get("training_status"),
                 animal.get("reserved"),
-                animal.get("in_service_country"),
+                animal.get("in_service_country")
             ))
 
-    def show_reserved(self):
-        """
-        Function to filter the animals to show animals with a reserved status
-        """
-
+    def _show_unreserved(self):
         dogs = load_animals("data/animal_data_dog.json")
-        monkey = load_animals("data/animal_data_monkey.json")
+        monkeys = load_animals("data/animal_data_monkey.json")
+        unreserved = [a for a in dogs + monkeys if a.get("reserved") == "No"]
+        self._display_animals(unreserved)
 
-        all_animals = dogs + monkey
-        reserved_animals = [animal for animal in all_animals if animal.get("reserved") == "No"]
+    def _toggle_reserved(self):
+        selected = self.tree.selection()
+        if not selected:
+            messagebox.showerror("Error", "No animal selected")
+            return
 
-        self.display_animals(reserved_animals)
+        item = self.tree.item(selected[0])["values"]
+        name, a_type, reserved = item[0], item[1], item[9]
+        new_status = "Yes" if reserved == "No" else "No"
+        item[9] = new_status
+        self.tree.item(selected[0], values=item)
+
+        file_path = f"data/animal_data_{a_type.lower()}.json"
+        animals = load_animals(file_path)
+        found = False
+        for animal in animals:
+            if animal["name"] == name and animal["animal_type"] == a_type:
+                animal["reserved"] = new_status
+                found = True
+                break
+        if found:
+            replace_all_animals(file_path, animals)
+            messagebox.showinfo("Success", "Animal data updated")
+        else:
+            messagebox.showerror("Error", "Animal not found")
+
+    def _open_form(self, animal_type):
+        form = AnimalFormWindow(self, animal_type=animal_type)
+        form.grab_set()
+        form.wait_window()

@@ -4,7 +4,6 @@ from animals.rescue_animal import RescueAnimal
 from animals.dog import Dog
 from animals.monkey import Monkey
 
-# touch every public property once
 @pytest.mark.parametrize(
     "field,value",
     [
@@ -19,29 +18,28 @@ from animals.monkey import Monkey
         ("in_service_country",  "Canada"),
     ],
 )
+
 def test_rescue_animal_setters_roundtrip(field, value):
-    # 9 positional args, in the order defined in rescue_animal.py
-    ra = RescueAnimal(
-        "Test",          # name
-        "Male",          # gender
-        4,               # age
-        10,              # weight
-        "2025-01-01",    # acquisition_date
-        "USA",           # acquisition_country
-        "Not Trained",   # training_status
-        "No",            # reserved
-        "USA",           # in_service_country
+    animal = RescueAnimal(
+        "Test",
+        "Male",
+        4,
+        10,
+        "2025-01-01",
+        "USA",
+        "Not Trained",
+        "No",
+        "USA",
     )
 
-    setattr(ra, field, value)
-    assert getattr(ra, field) == value
+    setattr(animal, field, value)
+    assert getattr(animal, field) == value
 
 def test_dog_properties_roundtrip():
     d = Dog("Fido", "Labrador", "Male", 3, 20, "2024-01-05",
             "USA", "Not Trained", "No", "USA")
     d.breed = "Beagle"
     assert d.breed == "Beagle"
-    # inherited
     d.weight = 22
     assert d.weight == 22
     assert d.animal_type == "Dog"

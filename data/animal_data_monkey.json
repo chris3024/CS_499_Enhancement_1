@@ -76,5 +76,18 @@
         "training_status": "Not Trained",
         "reserved": "Yes",
         "in_service_country": "Mexico"
+    },
+    {
+        "name": "Casey",
+        "species": "Marmoset",
+        "gender": "Female",
+        "age": "4",
+        "weight": "10",
+        "acquisition_date": "2025-05-05",
+        "acquisition_country": "Brazil",
+        "training_status": "Fully Trained",
+        "reserved": "No",
+        "in_service_country": "Brazil",
+        "animal_type": "Monkey"
     }
 ]

@@ -1,10 +1,9 @@
 import json
-from pathlib import Path
 import pytest
 
 @pytest.fixture
 def sample_animals():
-    """Return two dog + two monkey dicts – small and deterministic."""
+    """Return two dog + two monkey dicts"""
     return [
         {"name": "Fido", "animal_type": "Dog", "breed": "Labrador",
          "gender": "Male", "age": "3", "weight": "20", "acquisition_date": "2024-01-05",
@@ -26,7 +25,7 @@ def sample_animals():
 
 @pytest.fixture
 def tmp_json(tmp_path, sample_animals):
-    """Create a temporary JSON file pre‑populated with sample data."""
+    """Create a temporary JSON file with sample data."""
     file = tmp_path / "animals.json"
     file.write_text(json.dumps(sample_animals, indent=4))
     return file

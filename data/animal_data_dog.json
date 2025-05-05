@@ -37,5 +37,18 @@
         "reserved": "Yes",
         "in_service_country": "USA",
         "breed": "Newfoundland"
+    },
+    {
+        "name": "DOG",
+        "animal_type": "Dog",
+        "gender": "Female",
+        "age": "5",
+        "weight": "50",
+        "acquisition_date": "2025-05-05",
+        "acquisition_country": "USA",
+        "training_status": "In Training",
+        "reserved": "No",
+        "in_service_country": "USA",
+        "breed": "German Sheppard"
     }
 ]
