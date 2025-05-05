@@ -32,7 +32,7 @@ class AnimalFormWindow(tk.Toplevel):
             widget.grid(column=1, row=row, padx=10, pady=5, sticky="w")
             self.inputs[label.lower().replace(" ", "_")] = widget
 
-        # Now you call the function outside the definition
+
         add_input("Name", 0, lambda: ttk.Entry(frame, width=field_width))
 
         if self.animal_type == "Dog":
