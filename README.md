@@ -5,6 +5,10 @@
 ___
 This codebase holds the enhanced application from IT-145: Foundation in Application Development. In this improved codebase, we have added persistent data storage using JSON I/O. I have also implemented
 a GUI to make the application more user-friendly.
+
+![Screenshot 2025-05-18 125114](https://github.com/user-attachments/assets/8a799e35-fa44-4774-95e3-025a15a2fdea)
+![Screenshot 2025-05-18 125121](https://github.com/user-attachments/assets/f4940339-329d-4c91-b20c-aa1d0e148a22)
+
 ___
 ## Installation Instructions
 
