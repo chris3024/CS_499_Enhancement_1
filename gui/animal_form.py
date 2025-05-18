@@ -8,7 +8,6 @@ from tkinter import ttk, messagebox
 from data.data_manager import save_animals
 
 
-# Class to hold new window to add a new animal
 class AnimalFormWindow(tk.Toplevel):
 
     def __init__(self, parent, animal_type):
@@ -19,9 +18,9 @@ class AnimalFormWindow(tk.Toplevel):
         self.resizable(False, False)
 
         self.inputs = {}
-        self._build_form()
+        self.create_widgets()
 
-    def _build_form(self):
+    def create_widgets(self):
         field_width = 30
         frame = ttk.LabelFrame(self, text="Add Animal")
         frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
@@ -31,7 +30,6 @@ class AnimalFormWindow(tk.Toplevel):
             widget = widget_function()
             widget.grid(column=1, row=row, padx=10, pady=5, sticky="w")
             self.inputs[label.lower().replace(" ", "_")] = widget
-
 
         add_input("Name", 0, lambda: ttk.Entry(frame, width=field_width))
 
@@ -49,7 +47,7 @@ class AnimalFormWindow(tk.Toplevel):
             add_input(label, row, lambda: ttk.Entry(
                 frame, width=field_width,
                 validate="key",
-                validatecommand=(self.register(self._validate_integer), "%P")
+                validatecommand=(self.register(self.validate_integer), "%P")
             ))
 
         add_input("Acquisition Date", 5, lambda: ttk.Entry(frame, width=field_width))
@@ -62,14 +60,14 @@ class AnimalFormWindow(tk.Toplevel):
             frame, values=["Yes", "No"], state="readonly", width=25))
         add_input("In Service Country", 9, lambda: ttk.Entry(frame, width=field_width))
 
-        submit_btn = ttk.Button(frame, text="Submit", command=self._submit_form)
+        submit_btn = ttk.Button(frame, text="Submit", command=self.on_submit)
         submit_btn.grid(row=10, column=1, padx=10, pady=10, sticky="e")
 
     @staticmethod
-    def _validate_integer(value):
+    def validate_integer(value):
         return value.isdigit() or value == ""
 
-    def _submit_form(self):
+    def on_submit(self):
         required = ["name", "age", "weight", "gender", "acquisition_country", "in_service_country"]
         data = {k: widget.get() for k, widget in self.inputs.items()}
 

@@ -29,10 +29,10 @@ class AnimalApp(tk.Tk):
         self.main_frame.columnconfigure(0, weight=1)
         self.main_frame.rowconfigure(0, weight=1)
 
-        self._create_table()
-        self._create_buttons()
+        self.create_table()
+        self.create_action_panel()
 
-    def _create_table(self):
+    def create_table(self):
         column_widths = {
             "Name": 100, "Type": 80, "Breed/Species": 150, "Gender": 80,
             "Age": 50, "Weight": 60, "Acquisition Date": 110, "Acquisition Country": 120,
@@ -45,49 +45,49 @@ class AnimalApp(tk.Tk):
             self.tree.column(col, width=column_widths.get(col, 100), anchor="center", stretch=False)
         self.tree.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-    def _create_buttons(self):
+    def create_action_panel(self):
         frame = ttk.LabelFrame(self.main_frame, text="Actions")
         frame.grid(row=1, column=0, sticky="nw", padx=10)
 
         load_buttons = [
-            ("Load Dogs", lambda: self._load_animals("dog")),
-            ("Load Monkey", lambda: self._load_animals("monkey")),
-            ("Load All", self._load_all_animals)
+            ("Load Dogs", lambda: self.load_animals_by_type("dog")),
+            ("Load Monkey", lambda: self.load_animals_by_type("monkey")),
+            ("Load All", self.load_all_animals)
         ]
 
         for i, (text, cmd) in enumerate(load_buttons):
             ttk.Button(frame, text=text, command=cmd).grid(row=0, column=i, padx=5, pady=5)
 
         add_buttons = [
-            ("Add Dog", lambda: self._open_form("Dog")),
-            ("Add Monkey", lambda: self._open_form("Monkey"))
+            ("Add Dog", lambda: self.open_animal_form("Dog")),
+            ("Add Monkey", lambda: self.open_animal_form("Monkey"))
         ]
 
         for i, (text, cmd) in enumerate(add_buttons):
             ttk.Button(frame, text=text, command=cmd).grid(row=1, column=i, padx=5, pady=5)
 
         action_buttons = [
-            ("Available", self._show_unreserved),
-            ("Toggle Reserved", self._toggle_reserved)
+            ("Available", self.show_unreserved_animals),
+            ("Toggle Reserved", self.toggle_reserved_status)
         ]
 
         for i, (text, cmd) in enumerate(action_buttons):
             ttk.Button(frame, text=text, command=cmd).grid(row=2, column=i, padx=5, pady=5)
 
-    def _load_animals(self, animal_type):
+    def load_animals_by_type(self, animal_type):
         file_map = {
             "dog": "data/animal_data_dog.json",
             "monkey": "data/animal_data_monkey.json"
         }
         animals = load_animals(file_map[animal_type])
-        self._display_animals(animals)
+        self.display_animals(animals)
 
-    def _load_all_animals(self):
+    def load_all_animals(self):
         dogs = load_animals("data/animal_data_dog.json")
         monkeys = load_animals("data/animal_data_monkey.json")
-        self._display_animals(dogs + monkeys)
+        self.display_animals(dogs + monkeys)
 
-    def _display_animals(self, animals):
+    def display_animals(self, animals):
         self.tree.delete(*self.tree.get_children())
         for animal in animals:
             self.tree.insert("", "end", values=(
@@ -104,13 +104,13 @@ class AnimalApp(tk.Tk):
                 animal.get("in_service_country")
             ))
 
-    def _show_unreserved(self):
+    def show_unreserved_animals(self):
         dogs = load_animals("data/animal_data_dog.json")
         monkeys = load_animals("data/animal_data_monkey.json")
         unreserved = [a for a in dogs + monkeys if a.get("reserved") == "No"]
-        self._display_animals(unreserved)
+        self.display_animals(unreserved)
 
-    def _toggle_reserved(self):
+    def toggle_reserved_status(self):
         selected = self.tree.selection()
         if not selected:
             messagebox.showerror("Error", "No animal selected")
@@ -124,19 +124,16 @@ class AnimalApp(tk.Tk):
 
         file_path = f"data/animal_data_{a_type.lower()}.json"
         animals = load_animals(file_path)
-        found = False
         for animal in animals:
             if animal["name"] == name and animal["animal_type"] == a_type:
                 animal["reserved"] = new_status
-                found = True
-                break
-        if found:
-            replace_all_animals(file_path, animals)
-            messagebox.showinfo("Success", "Animal data updated")
-        else:
-            messagebox.showerror("Error", "Animal not found")
+                replace_all_animals(file_path, animals)
+                messagebox.showinfo("Success", "Animal data updated")
+                return
 
-    def _open_form(self, animal_type):
+        messagebox.showerror("Error", "Animal not found")
+
+    def open_animal_form(self, animal_type):
         form = AnimalFormWindow(self, animal_type=animal_type)
         form.grab_set()
         form.wait_window()
