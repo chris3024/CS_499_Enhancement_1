@@ -70,9 +70,6 @@ class AnimalFormWindow(tk.Toplevel):
 
     @staticmethod
     def validate_integer(value):
-        """
-
-        """
         return value.isdigit() or value == ""
 
     def on_submit(self):
