@@ -1,6 +1,11 @@
 """
-data.data_manager
-Handles the saving and loading of the JSON files
+Name: Christopher Sharp
+Course: CS499 Computer Science Capstone
+Date Last Modified: 05-18-2025
+
+Description:
+    data.data_manager
+    Handles the saving and loading of the JSON files
 """
 
 import json

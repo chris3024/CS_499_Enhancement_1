@@ -1,6 +1,11 @@
 """
-gui.animal_form
-Handles the form to add animals
+Name: Christopher Sharp
+Course: CS499 Computer Science Capstone
+Date Last Modified: 05-18-2025
+
+Description:
+    gui.animal_form
+    Handles the form to add animals
 """
 from datetime import datetime
 import tkinter as tk
@@ -65,6 +70,9 @@ class AnimalFormWindow(tk.Toplevel):
 
     @staticmethod
     def validate_integer(value):
+        """
+
+        """
         return value.isdigit() or value == ""
 
     def on_submit(self):

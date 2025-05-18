@@ -1,6 +1,11 @@
 """
-gui.app
-This houses the main GUI for the application and builds it
+Name: Christopher Sharp
+Course: CS499 Computer Science Capstone
+Date Last Modified: 05-18-2025
+
+Description:
+    gui.app
+    This houses the main GUI for the application and builds it
 """
 
 import tkinter as tk
@@ -88,6 +93,10 @@ class AnimalApp(tk.Tk):
         self.display_animals(dogs + monkeys)
 
     def display_animals(self, animals):
+        """
+        Takes the loaded animal data and formats it
+        for display into the treeview
+        """
         self.tree.delete(*self.tree.get_children())
         for animal in animals:
             self.tree.insert("", "end", values=(
@@ -111,6 +120,9 @@ class AnimalApp(tk.Tk):
         self.display_animals(unreserved)
 
     def toggle_reserved_status(self):
+        """
+        Takes the selected animal and toggles its reserved status
+        """
         selected = self.tree.selection()
         if not selected:
             messagebox.showerror("Error", "No animal selected")
