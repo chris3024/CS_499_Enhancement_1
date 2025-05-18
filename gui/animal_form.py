@@ -5,7 +5,7 @@ Handles the form to add animals
 from datetime import datetime
 import tkinter as tk
 from tkinter import ttk, messagebox
-from data.data_manager import save_animals
+from data.data_manager import append_animal_records
 
 
 class AnimalFormWindow(tk.Toplevel):
@@ -25,11 +25,11 @@ class AnimalFormWindow(tk.Toplevel):
         frame = ttk.LabelFrame(self, text="Add Animal")
         frame.grid(column=0, row=0, padx=10, pady=10, sticky="nsew")
 
-        def add_input(label, row, widget_function):
-            ttk.Label(frame, text=label).grid(column=0, row=row, padx=10, pady=5, sticky="e")
+        def add_input(labels, rows, widget_function):
+            ttk.Label(frame, text=labels).grid(column=0, row=rows, padx=10, pady=5, sticky="e")
             widget = widget_function()
-            widget.grid(column=1, row=row, padx=10, pady=5, sticky="w")
-            self.inputs[label.lower().replace(" ", "_")] = widget
+            widget.grid(column=1, row=rows, padx=10, pady=5, sticky="w")
+            self.inputs[labels.lower().replace(" ", "_")] = widget
 
         add_input("Name", 0, lambda: ttk.Entry(frame, width=field_width))
 
@@ -86,6 +86,6 @@ class AnimalFormWindow(tk.Toplevel):
             messagebox.showerror("Error", f"{specific_field.capitalize()} is required.", parent=self)
             return
 
-        save_animals(file_name, [data])
+        append_animal_records(file_name, [data])
         messagebox.showinfo("Success", f"{self.animal_type} saved!", parent=self)
         self.destroy()

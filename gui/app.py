@@ -6,7 +6,7 @@ This houses the main GUI for the application and builds it
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sv_ttk
-from data.data_manager import load_animals, replace_all_animals
+from data.data_manager import read_animal_data, overwrite_animal_data
 from gui.animal_form import AnimalFormWindow
 
 class AnimalApp(tk.Tk):
@@ -79,12 +79,12 @@ class AnimalApp(tk.Tk):
             "dog": "data/animal_data_dog.json",
             "monkey": "data/animal_data_monkey.json"
         }
-        animals = load_animals(file_map[animal_type])
+        animals = read_animal_data(file_map[animal_type])
         self.display_animals(animals)
 
     def load_all_animals(self):
-        dogs = load_animals("data/animal_data_dog.json")
-        monkeys = load_animals("data/animal_data_monkey.json")
+        dogs = read_animal_data("data/animal_data_dog.json")
+        monkeys = read_animal_data("data/animal_data_monkey.json")
         self.display_animals(dogs + monkeys)
 
     def display_animals(self, animals):
@@ -105,8 +105,8 @@ class AnimalApp(tk.Tk):
             ))
 
     def show_unreserved_animals(self):
-        dogs = load_animals("data/animal_data_dog.json")
-        monkeys = load_animals("data/animal_data_monkey.json")
+        dogs = read_animal_data("data/animal_data_dog.json")
+        monkeys = read_animal_data("data/animal_data_monkey.json")
         unreserved = [a for a in dogs + monkeys if a.get("reserved") == "No"]
         self.display_animals(unreserved)
 
@@ -123,11 +123,11 @@ class AnimalApp(tk.Tk):
         self.tree.item(selected[0], values=item)
 
         file_path = f"data/animal_data_{a_type.lower()}.json"
-        animals = load_animals(file_path)
+        animals = read_animal_data(file_path)
         for animal in animals:
             if animal["name"] == name and animal["animal_type"] == a_type:
                 animal["reserved"] = new_status
-                replace_all_animals(file_path, animals)
+                overwrite_animal_data(file_path, animals)
                 messagebox.showinfo("Success", "Animal data updated")
                 return
 

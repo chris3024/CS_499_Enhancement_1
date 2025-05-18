@@ -50,5 +50,18 @@
         "reserved": "No",
         "in_service_country": "USA",
         "breed": "German Sheppard"
+    },
+    {
+        "name": "Jim",
+        "breed": "Boston Terrier",
+        "gender": "Female",
+        "age": "5",
+        "weight": "75",
+        "acquisition_date": "2025-05-18",
+        "acquisition_country": "USA",
+        "training_status": "In Training",
+        "reserved": "No",
+        "in_service_country": "USA",
+        "animal_type": "Dog"
     }
 ]
