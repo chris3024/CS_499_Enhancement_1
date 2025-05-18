@@ -1,11 +1,15 @@
 """
-animals.dog
-Handles the animal class and its attributes
+Name: Christopher Sharp
+Course: CS499 Computer Science Capstone
+Date Last Modified: 05-18-2025
+
+Description:
+    animals.dog
+    Handles the DOg animal class and its attributes
 """
 
 from animals.rescue_animal import RescueAnimal
 
-# Dog class for dog data
 class Dog(RescueAnimal):
     def __init__(
             self, name, breed, gender, age, weight, acquisition_date, acquisition_country,
@@ -16,7 +20,7 @@ class Dog(RescueAnimal):
         self._breed = breed
         self._animal_type = 'Dog'
 
-    # Getters/Setters for Dog class
+
     @property
     def breed(self):
         return self._breed

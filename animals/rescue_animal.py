@@ -1,6 +1,13 @@
-# animal/animal_rescue.py
+"""
+Name: Christopher Sharp
+Course: CS499 Computer Science Capstone
+Date Last Modified: 05-18-2025
 
-# Parent animal class
+Description:
+    animals.rescue_animal
+    Handles the base animal class and its attributes
+"""
+
 class RescueAnimal:
     def __init__(self, name, gender, age, weight, acquisition_date,
                  acquisition_country, training_status, reserved, in_service_country):
@@ -16,7 +23,7 @@ class RescueAnimal:
         self._in_service_country = in_service_country
         self._animal_type = None
 
-    # Setters and Getters for the class
+
     @property
     def name(self):
         return self._name
