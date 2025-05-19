@@ -3,11 +3,14 @@
 ![pylint](https://img.shields.io/badge/PyLint-9.92-yellow?logo=python&logoColor=white)
 [![CodeQL Advanced](https://github.com/chris3024/CS_499_Enhancement_1/actions/workflows/codeql.yml/badge.svg)](https://github.com/chris3024/CS_499_Enhancement_1/actions/workflows/codeql.yml)
 ___
-This codebase holds the enhanced application from IT-145: Foundation in Application Development. In this improved codebase, we have added persistent data storage using JSON I/O. I have also implemented
-a GUI to make the application more user-friendly.
+This codebase holds the enhanced application from IT-145: Foundation in Application Development. The original code consisted of a console-based application that allowed for adding new animals, printing all of the animals, and setting the reserved status of the animals. In this improved codebase, we have added persistent data  storage using JSON I/O. I have also implemented a GUI to make the application more user-friendly.
 
-<img src="Screenshot 2025-05-18 125114.png" alt="New GUI for application" width="436" height="252"/>
-<img src="Screenshot 2025-05-18 125121.png" alt="New GUI for application" width="436" height="252"/>
+### Main GUI Window
+<img src="screenshots/Screenshot 2025-05-18 125114.png" alt="New GUI for application" width="436" height="252"/> <img src="screenshots/Screenshot 2025-05-18 125121.png" alt="New GUI for application" width="436" height="252"/>
+
+### Add Animal Window (All Fields Required)
+<img src="screenshots/Screenshot 2025-05-19 121649.png" alt="Add Animal Window" width="160" height="252"/>
+
 ___
 ## Installation Instructions
 
