@@ -6,7 +6,15 @@ ___
 This codebase holds the enhanced application from IT-145: Foundation in Application Development. In this improved codebase, we have added persistent data storage using JSON I/O. I have also implemented
 a GUI to make the application more user-friendly.
 
-<img src="Screenshot 2025-05-18 125114.png" alt="New GUI for application" width="436" height="252"/><img src="Screenshot 2025-05-18 125121.png" alt="New GUI for application" width="436" height="252"/>
+### Main GUI Window
+<img src="Screenshot 2025-05-18 125114.png" alt="New GUI for application" width="436" height="252"/>
+
+### Main Window (Data Loaded)
+<img src="Screenshot 2025-05-18 125121.png" alt="New GUI for application" width="436" height="252"/>
+
+### Add Animals Window (All Fields Required)
+<img src="" alt="Add Animal Window" width="436" height="252"/>
+
 ___
 ## Installation Instructions
 
