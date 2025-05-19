@@ -5,7 +5,8 @@ Date Last Modified: 05-18-2025
 
 Description:
     main.py
-    Runs the main application
+    Runs the main application,
+    while also setting up logging for the application.
 """
 
 from __future__ import annotations

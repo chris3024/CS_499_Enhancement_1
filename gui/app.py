@@ -5,7 +5,9 @@ Date Last Modified: 05-18-2025
 
 Description:
     gui.app
-    This houses the main GUI for the application and builds it
+    This houses the main GUI for the application
+    It sets the treeview and button layout,
+    while implementing methods that carryout the actions of the buttons.
 """
 
 import tkinter as tk

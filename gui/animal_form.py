@@ -5,7 +5,10 @@ Date Last Modified: 05-18-2025
 
 Description:
     gui.animal_form
-    Handles the form to add animals
+    Handles the form to add animals, by taking in the users entries and
+    Saving them to the correct file in JSON format
+
+    Error handling is in place to make sure all entries are valid
 """
 from datetime import datetime
 import tkinter as tk
